@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const { MONGODB_URI, SERVER_PORT } = process.env;
+const { MONGODB_URI, PORT = 8080 } = process.env;
 const collectionsRoutes = require('./routes/collections.routes');
 const productsRoutes = require('./routes/products.routes');
 const paymentsRoutes = require('./routes/payments.routes');
@@ -28,6 +28,6 @@ paymentsRoutes(app);
 
 //--------------------------------------Running Server-------------------------------------------------
 
-app.listen(SERVER_PORT, () => {
-    console.log('Server is running! => ', { SERVER_PORT });
+app.listen(PORT, () => {
+    console.log('Server is running! => ', { PORT });
 });
