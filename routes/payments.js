@@ -1,6 +1,6 @@
-const service = require('../services/payments.service');
+const service = require('../lib/charge-account');
 
-const chargeAccount = async (req, res) => {
+module.exports = async (req, res) => {
     try {
         const { id, amount } = req.body;
         const data = await service.chargeAccount({ id, amount });
@@ -10,7 +10,3 @@ const chargeAccount = async (req, res) => {
         res.json(err);
     }
 }
-
-module.exports = {
-    chargeAccount,
-};

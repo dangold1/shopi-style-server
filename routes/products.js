@@ -1,4 +1,4 @@
-const service = require('../services/products.service');
+const service = require('../lib/products');
 
 const getProductByID = async (req, res) => {
     try {
