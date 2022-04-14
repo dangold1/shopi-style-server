@@ -1,12 +1,19 @@
-const service = require('../lib/charge-account');
-
 module.exports = async (req, res) => {
     try {
-        const { id, amount } = req.body;
-        const data = await service.chargeAccount({ id, amount });
-        res.json(data);
+        const { body: { id, amount } } = req;
+
+        await stripe.paymentIntents.create({
+            amount,
+            currency: 'USD',
+            description: 'User Items',
+            payment_method: id,
+            confirm: true
+        })
+
+        return res.json({ isConfirm: true });
     } catch (err) {
         console.log(err)
-        res.json(err);
+
+        return res.json(err);
     }
 }

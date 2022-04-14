@@ -2,21 +2,21 @@ const express = require('express')
 const router = express.Router()
 
 const {
-    getProduct,
-    getMatchProducts,
-    getCollection,
-    chargeAccount,
-} = require('../lib')
+    getProductByID,
+    getProductByText,
+} = require('./products')
 
+const getCollection = require('./collections')
+const payment = require('./payments')
 
 // collections
 router.post('/collection/:collection', getCollection);
 
 // products
-router.get('/product/:collection/:productID', getProduct);
-router.get('/products', getMatchProducts);
+router.get('/product/:collection/:productID', getProductByID);
+router.get('/products', getProductByText);
 
 // payments
-router.post('/payment', chargeAccount);
+router.post('/payment', payment);
 
 module.exports = router
