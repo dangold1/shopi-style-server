@@ -18,7 +18,7 @@ const getProductByID = async (req, res) => {
 
         return res.json(data);
     } catch (err) {
-        console.log(err);
+        console.log({err});
 
         return res.json(err);
     }

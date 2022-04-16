@@ -14,17 +14,19 @@ module.exports = async (req, res) => {
             colors = []
         } = params;
     
-        const productsQuery = { subCategory: collection };
+        const query = { subCategory: collection };
     
-        if (gender) productsQuery.gender = gender;
-        if (types.length) productsQuery.types = { $in: types };
-        if (colors.length) productsQuery.colors = { $in: colors };
+        if (gender) query.gender = gender;
+
+        if (types.length) query.types = { $in: types };
+
+        if (colors.length) query.colors = { $in: colors };
     
-        const products = await Products.find(productsQuery);
+        const products = await Products.find(query).lean().exec();
     
-        const subCategory = await SubCategories.findOne({ name: collection });
+        const subCategory = await SubCategories.findOne({ name: collection }).lean().exec();
     
-        const colorsOptions = await Products.distinct('colors', { subCategory: collection });
+        const colorsOptions = await Products.distinct('colors', { subCategory: collection }).lean().exec();
 
         return res.json({
             products,
@@ -32,7 +34,7 @@ module.exports = async (req, res) => {
             colorsOptions
         })
     } catch (err) {
-        console.log(err)
+        console.log({err})
 
         return res.json(err);
     }

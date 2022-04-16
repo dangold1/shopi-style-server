@@ -11,7 +11,7 @@ const {
 const api = require('./routes')
 
 const app = express();
-//----------------------------------DB Connection---------------------------------------------
+
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -20,14 +20,9 @@ mongoose.connect(MONGODB_URI, {
     console.log(`mongodb ${status} MONGODB_URI => ${MONGODB_URI}`);
 });
 
-//----------------------------------Middlewares---------------------------------------------
-app.use(bodyParser.json());
-app.use(cors());
-//---------------------------------------Routes-----------------------------------------------
+app.use(express.json());
 
-app.use('/api', api);
-
-//--------------------------------------Running Server-------------------------------------------------
+app.use('/', api);
 
 app.listen(PORT, () => {
     console.log('Server is running! => ', { PORT });
