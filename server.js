@@ -1,14 +1,12 @@
-require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const mongoose = require('mongoose');
+
 const {
     MONGODB_URI,
     PORT = 8080
-} = process.env;
+} = require('./src/consts');
 
-const api = require('./routes')
+const api = require('./src/routes')
 
 const app = express();
 
@@ -17,7 +15,7 @@ mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true
 }, (err) => {
     const status = err || 'connected!';
-    console.log(`mongodb ${status} MONGODB_URI => ${MONGODB_URI}`);
+    console.log('mongodb connection:', {status ,MONGODB_URI});
 });
 
 app.use(express.json());

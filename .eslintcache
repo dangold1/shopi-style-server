@@ -1,0 +1,7 @@
+{
+    "extends": ["@coognitive/eslint-config"],
+    "parserOptions": {
+      "ecmaVersion": 2020
+    }
+  }
+  
