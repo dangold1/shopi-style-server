@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 const {
     MONGODB_URI,
@@ -15,10 +16,11 @@ mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true
 }, (err) => {
     const status = err || 'connected!';
-    console.log('mongodb connection:', {status ,MONGODB_URI});
+    console.log('mongodb connection:', { status, MONGODB_URI });
 });
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/', api);
 
